@@ -86,6 +86,37 @@ async function fetchJson(url, { tries = 3, timeout = 15000 } = {}) {
   throw new Error(`${lastErr.message}  ←  ${url}`);
 }
 
+async function fetchText(url, { tries = 2, timeout = 15000 } = {}) {
+  let lastErr;
+  for (let i = 0; i < tries; i++) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'User-Agent': UA },
+        signal: AbortSignal.timeout(timeout),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.text();
+    } catch (err) {
+      lastErr = err;
+      if (i < tries - 1) await new Promise(r => setTimeout(r, 500 * (i + 1)));
+    }
+  }
+  throw new Error(`${lastErr.message}  ←  ${url}`);
+}
+
+/** 按点分数字比较版本号，取最大。「26.3」要大于「1.21.11」 */
+function maxVersion(list) {
+  const parse = v => String(v).split(/[.-]/).map(n => (/^\d+$/.test(n) ? Number(n) : 0));
+  return [...new Set(list.filter(Boolean))].sort((a, b) => {
+    const pa = parse(a), pb = parse(b);
+    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+      const d = (pa[i] ?? 0) - (pb[i] ?? 0);
+      if (d) return d;
+    }
+    return 0;
+  }).pop();
+}
+
 /* -------------------------------------------------------- 文本处理 */
 
 function decodeEntities(s) {
@@ -237,6 +268,87 @@ async function buildEntry(entry, index = 0) {
   };
 }
 
+/* ------------------------------------------------------- 运维专区数据 */
+
+/** PaperMC 系（paper / velocity / folia）走 v3 接口，旧的 api.papermc.io/v2 已 410 下线 */
+async function papermcLatest(slug) {
+  const d = await fetchJson(`https://fill.papermc.io/v3/projects/${slug}`);
+  const all = Object.values(d.versions ?? {}).flat()
+    .filter(v => !/(snapshot|-rc|-pre)/i.test(v));
+  return maxVersion(all);
+}
+
+const OPS_SOURCES = [
+  {
+    name: 'Fabric', group: 'loader', logo: 'Fabric.png', url: 'https://fabricmc.net/',
+    async latest() {
+      const list = await fetchJson('https://meta.fabricmc.net/v2/versions/loader');
+      const stable = list.find(x => x.stable) ?? list[0];
+      return stable.version;
+    },
+  },
+  {
+    name: 'Forge', group: 'loader', logo: 'Anvil.png', url: 'https://files.minecraftforge.net/',
+    async latest() {
+      const d = await fetchJson('https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json');
+      const promos = d.promos ?? {};
+      const mcList = [...new Set(Object.keys(promos).map(k => k.replace(/-(latest|recommended)$/, '')))];
+      const mc = maxVersion(mcList);
+      const forge = promos[`${mc}-latest`] ?? promos[`${mc}-recommended`];
+      return forge ? `${mc}-${forge}` : mc;
+    },
+  },
+  {
+    name: 'NeoForge', group: 'loader', logo: 'NeoForge.png', url: 'https://neoforged.net/',
+    async latest() {
+      const d = await fetchJson('https://maven.neoforged.net/api/maven/latest/version/releases/net/neoforged/neoforge');
+      return d.version;
+    },
+  },
+  {
+    name: 'Paper', group: 'server', logo: 'Egg.png', url: 'https://papermc.io/downloads/paper',
+    latest: () => papermcLatest('paper'),
+  },
+  {
+    name: 'Leaves', group: 'server', logo: 'Grass.png', url: 'https://leavesmc.org/',
+    async latest() {
+      const d = await fetchJson('https://api.leavesmc.org/v2/projects/leaves');
+      return maxVersion(d.versions ?? []);
+    },
+  },
+  {
+    name: 'Velocity', group: 'server', logo: 'RedstoneLampOn.png', url: 'https://papermc.io/downloads/velocity',
+    latest: () => papermcLatest('velocity'),
+  },
+  {
+    name: 'Folia', group: 'server', logo: 'RedstoneBlock.png', url: 'https://papermc.io/downloads/folia',
+    latest: () => papermcLatest('folia'),
+  },
+  {
+    name: 'Spigot', group: 'server', logo: 'CommandBlock.png', url: 'https://www.spigotmc.org/',
+    async latest() {
+      // Spigot 没有公开 API，只能读 hub 的版本目录（每个受支持的 MC 版本一个 json 文件）
+      const html = await fetchText('https://hub.spigotmc.org/versions/');
+      const vers = [...html.matchAll(/href="([0-9][0-9.]*)\.json"/g)].map(m => m[1]);
+      return maxVersion(vers);
+    },
+  },
+];
+
+/** 每行 3 个，排成 Grid；模板里已固定 3 列 2 行 */
+function opsXaml(items) {
+  return items.map((it, i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    return `            <local:MyListItem Grid.Row="${row}" Grid.Column="${col}"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/${it.logo}"
+                              Title="${esc(it.name)}" Info="${esc(it.version)}"
+                              ToolTip="打开 ${esc(it.name)} 官网"
+                              EventType="打开网页" EventData="${esc(it.url)}" />`;
+  }).join('\n');
+}
+
 /* ------------------------------------------------------------ 主流程 */
 
 /**
@@ -296,9 +408,23 @@ async function main() {
     console.log(`   ${e.version.padEnd(18)} ${e.date}  ${e.codename}  [${e.source}]`);
   }
 
+  console.log('→ 抓取运维专区版本 …');
+  const ops = await Promise.all(OPS_SOURCES.map(async s => {
+    try {
+      const version = await s.latest();
+      console.log(`   ${s.name.padEnd(10)} ${version}`);
+      return { ...s, version };
+    } catch (err) {
+      console.warn(`   ${s.name.padEnd(10)} 获取失败（${err.message}）`);
+      return { ...s, version: '—' };
+    }
+  }));
+
   const template = await readFile(resolve(HERE, 'template.xaml'), 'utf8');
   const out = template
     .replace('@@CHANGELOG_ENTRIES@@', entries.map(e => e.xaml).join('\n\n'))
+    .replace('@@OPS_LOADERS@@', opsXaml(ops.filter(o => o.group === 'loader')))
+    .replace('@@OPS_SERVERS@@', opsXaml(ops.filter(o => o.group === 'server')))
     .replace(/@@UPDATED_AT@@/g, stamp())
     .replace(/@@NEXT_UPDATE@@/g, nextRun());
 

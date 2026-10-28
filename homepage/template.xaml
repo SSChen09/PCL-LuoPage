@@ -38,7 +38,46 @@
 
 
 <!-- ==================================================================================
-     卡片 2 · 近期版本更新（内容由接口生成，勿手改）
+     卡片 2 · 运维专区（版本号由接口生成，勿手改）
+     ================================================================================== -->
+<local:MyCard Title="运维专区" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+
+        <TextBlock Margin="0,0,0,4" FontSize="12" FontWeight="Bold"
+                   Foreground="{DynamicResource ColorBrush1}" Text="模组加载器" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+@@OPS_LOADERS@@
+        </Grid>
+
+        <TextBlock Margin="0,12,0,4" FontSize="12" FontWeight="Bold"
+                   Foreground="{DynamicResource ColorBrush1}" Text="服务端" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+@@OPS_SERVERS@@
+        </Grid>
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     卡片 3 · 近期版本更新（内容由接口生成，勿手改）
      ================================================================================== -->
 <local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
     <StackPanel Margin="25,40,23,15">

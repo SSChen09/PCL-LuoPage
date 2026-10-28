@@ -38,7 +38,92 @@
 
 
 <!-- ==================================================================================
-     卡片 2 · 近期版本更新（内容由接口生成，勿手改）
+     卡片 2 · 运维专区（版本号由接口生成，勿手改）
+     ================================================================================== -->
+<local:MyCard Title="运维专区" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+
+        <TextBlock Margin="0,0,0,4" FontSize="12" FontWeight="Bold"
+                   Foreground="{DynamicResource ColorBrush1}" Text="模组加载器" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <local:MyListItem Grid.Row="0" Grid.Column="0"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Fabric.png"
+                              Title="Fabric" Info="0.20.1"
+                              ToolTip="打开 Fabric 官网"
+                              EventType="打开网页" EventData="https://fabricmc.net/" />
+            <local:MyListItem Grid.Row="0" Grid.Column="1"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Anvil.png"
+                              Title="Forge" Info="26.3-66.1.0"
+                              ToolTip="打开 Forge 官网"
+                              EventType="打开网页" EventData="https://files.minecraftforge.net/" />
+            <local:MyListItem Grid.Row="0" Grid.Column="2"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/NeoForge.png"
+                              Title="NeoForge" Info="26.3.0.99"
+                              ToolTip="打开 NeoForge 官网"
+                              EventType="打开网页" EventData="https://neoforged.net/" />
+        </Grid>
+
+        <TextBlock Margin="0,12,0,4" FontSize="12" FontWeight="Bold"
+                   Foreground="{DynamicResource ColorBrush1}" Text="服务端" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <local:MyListItem Grid.Row="0" Grid.Column="0"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Egg.png"
+                              Title="Paper" Info="26.3"
+                              ToolTip="打开 Paper 官网"
+                              EventType="打开网页" EventData="https://papermc.io/downloads/paper" />
+            <local:MyListItem Grid.Row="0" Grid.Column="1"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Grass.png"
+                              Title="Leaves" Info="1.21.11"
+                              ToolTip="打开 Leaves 官网"
+                              EventType="打开网页" EventData="https://leavesmc.org/" />
+            <local:MyListItem Grid.Row="0" Grid.Column="2"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/RedstoneLampOn.png"
+                              Title="Velocity" Info="4.3.1"
+                              ToolTip="打开 Velocity 官网"
+                              EventType="打开网页" EventData="https://papermc.io/downloads/velocity" />
+            <local:MyListItem Grid.Row="1" Grid.Column="0"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/RedstoneBlock.png"
+                              Title="Folia" Info="26.3"
+                              ToolTip="打开 Folia 官网"
+                              EventType="打开网页" EventData="https://papermc.io/downloads/folia" />
+            <local:MyListItem Grid.Row="1" Grid.Column="1"
+                              Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/CommandBlock.png"
+                              Title="Spigot" Info="26.3"
+                              ToolTip="打开 Spigot 官网"
+                              EventType="打开网页" EventData="https://www.spigotmc.org/" />
+        </Grid>
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     卡片 3 · 近期版本更新（内容由接口生成，勿手改）
      ================================================================================== -->
 <local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
     <StackPanel Margin="25,40,23,15">
@@ -132,7 +217,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 00:56" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 01:04" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
