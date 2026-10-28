@@ -236,9 +236,16 @@ async function buildEntry(entry, index = 0) {
 
 /* ------------------------------------------------------------ 主流程 */
 
+/**
+ * 「数据更新于」时间，固定按北京时间（UTC+8）输出。
+ * 不能用本地时区：GitHub Actions 的 runner 是 UTC，本地跑是 +8，
+ * 同一份代码会写出差 8 小时的结果，页脚标注的「北京时间」就成了假话。
+ */
 function stamp(d = new Date()) {
+  const bj = new Date(d.getTime() + 8 * 3600000);
   const p = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+  return `${bj.getUTCFullYear()}-${p(bj.getUTCMonth() + 1)}-${p(bj.getUTCDate())} `
+    + `${p(bj.getUTCHours())}:${p(bj.getUTCMinutes())}`;
 }
 
 /**
