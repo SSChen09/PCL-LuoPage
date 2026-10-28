@@ -7,151 +7,13 @@
        - ../Custom.xaml          PCL 本地主页（直接生效）
        - ./dist/Custom.xaml      联网主页用（上传到任意静态托管）
 
-     所以：改样式、改服务器列表，都改这个文件，别改生成的 Custom.xaml。
+     所以：改样式、改卡片内容，都改这个文件，别改生成的 Custom.xaml。
      改完执行：node homepage/build.mjs
      ================================================================================== -->
 
 
 <!-- ==================================================================================
-     卡片 1 · 服务器一键启动
-     ================================================================================== -->
-<local:MyCard Title="服务器一键启动" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
-    <StackPanel Margin="25,40,23,15">
-
-        <!-- 顶部：当前选中的服务器 + 选择按钮 -->
-        <Grid Margin="0,0,0,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="12"
-                       Foreground="{DynamicResource ColorBrush3}" Text="当前服务器" />
-
-            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
-                       Foreground="{DynamicResource ColorBrush1}" Text="{variable:SrvName:Hypixel}" />
-
-            <!-- 下拉未展开时显示「选择」 -->
-            <local:MyButton Grid.Column="2" Height="32" Padding="16,0,16,0" ColorType="Highlight"
-                            Text="选择 ▾" Visibility="{variable:DropOpen:Collapsed}">
-                <local:CustomEventService.Events>
-                    <local:CustomEventCollection>
-                        <local:CustomEvent Type="修改变量" Data="DropOpen|Visible|-" />
-                        <local:CustomEvent Type="刷新页面" Data="-" />
-                    </local:CustomEventCollection>
-                </local:CustomEventService.Events>
-            </local:MyButton>
-
-            <!-- 下拉已展开时显示「收起」 -->
-            <local:MyButton Grid.Column="2" Height="32" Padding="16,0,16,0"
-                            Text="收起 ▴" Visibility="{variable:DropOpen:Visible}">
-                <local:CustomEventService.Events>
-                    <local:CustomEventCollection>
-                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
-                        <local:CustomEvent Type="刷新页面" Data="-" />
-                    </local:CustomEventCollection>
-                </local:CustomEventService.Events>
-            </local:MyButton>
-        </Grid>
-
-        <!-- 下拉列表（默认收起） -->
-        <StackPanel Visibility="{variable:DropOpen:Collapsed}" Margin="0,0,0,6">
-
-            <!-- SERVER-1 -->
-            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/Grass.png"
-                              Title="Hypixel" Info="mc.hypixel.net · 推荐版本 1.16.3">
-                <local:CustomEventService.Events>
-                    <local:CustomEventCollection>
-                        <local:CustomEvent Type="修改变量" Data="SrvName|Hypixel|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv0|Visible|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv1|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv2|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv3|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
-                        <local:CustomEvent Type="刷新页面" Data="-" />
-                    </local:CustomEventCollection>
-                </local:CustomEventService.Events>
-            </local:MyListItem>
-
-            <!-- SERVER-2 -->
-            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/CommandBlock.png"
-                              Title="2B2T" Info="connect.2b2t.org · 无政府服务器，注意备份存档">
-                <local:CustomEventService.Events>
-                    <local:CustomEventCollection>
-                        <local:CustomEvent Type="修改变量" Data="SrvName|2B2T|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv0|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv1|Visible|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv2|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv3|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
-                        <local:CustomEvent Type="刷新页面" Data="-" />
-                    </local:CustomEventCollection>
-                </local:CustomEventService.Events>
-            </local:MyListItem>
-
-            <!-- SERVER-3 -->
-            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/GoldBlock.png"
-                              Title="本地联机测试" Info="localhost:25565 · 1.20.1 · 用于测试服务端与模组">
-                <local:CustomEventService.Events>
-                    <local:CustomEventCollection>
-                        <local:CustomEvent Type="修改变量" Data="SrvName|本地联机测试|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv0|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv1|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv2|Visible|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv3|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
-                        <local:CustomEvent Type="刷新页面" Data="-" />
-                    </local:CustomEventCollection>
-                </local:CustomEventService.Events>
-            </local:MyListItem>
-
-            <!-- SERVER-4（占位，改成你自己的服务器） -->
-            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/Anvil.png"
-                              Title="我的服务器" Info="这里改成地址 · 修改下方启动按钮的 EventData">
-                <local:CustomEventService.Events>
-                    <local:CustomEventCollection>
-                        <local:CustomEvent Type="修改变量" Data="SrvName|我的服务器|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv0|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv1|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv2|Collapsed|-" />
-                        <local:CustomEvent Type="修改变量" Data="Srv3|Visible|-" />
-                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
-                        <local:CustomEvent Type="刷新页面" Data="-" />
-                    </local:CustomEventCollection>
-                </local:CustomEventService.Events>
-            </local:MyListItem>
-
-        </StackPanel>
-
-        <!-- 启动按钮：同一时刻只显示与当前选择匹配的那一个 -->
-        <StackPanel Margin="0,4,0,0">
-            <local:MyButton Height="42" ColorType="Highlight" Text="启动 Hypixel"
-                            EventType="启动游戏" EventData="1.16.3|mc.hypixel.net"
-                            Visibility="{variable:Srv0:Visible}" />
-            <local:MyButton Height="42" ColorType="Highlight" Text="启动 2B2T"
-                            EventType="启动游戏" EventData="1.21.4|connect.2b2t.org"
-                            Visibility="{variable:Srv1:Collapsed}" />
-            <local:MyButton Height="42" ColorType="Highlight" Text="启动 本地联机测试"
-                            EventType="启动游戏" EventData="1.20.1|localhost:25565"
-                            Visibility="{variable:Srv2:Collapsed}" />
-            <local:MyButton Height="42" ColorType="Highlight" Text="启动 我的服务器"
-                            EventType="启动游戏" EventData="1.20.1|你的服务器地址"
-                            Visibility="{variable:Srv3:Collapsed}" />
-        </StackPanel>
-
-        <local:MyHint Margin="0,12,0,0" Theme="Blue"
-                      Text="启动前请确认 PCL 里已安装对应的游戏版本，版本号写在按钮的 EventData 中（格式：版本|地址）。&#xA;想增删服务器？编辑 homepage/template.xaml，搜索 SERVER- 即可定位。" />
-    </StackPanel>
-</local:MyCard>
-
-
-<!-- ==================================================================================
-     卡片 2 · 内存优化
+     卡片 1 · 内存优化
      ================================================================================== -->
 <local:MyCard Title="内存优化" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
     <StackPanel Margin="25,40,23,15">
@@ -179,7 +41,7 @@
 
 
 <!-- ==================================================================================
-     卡片 3 · 近期版本更新（内容由接口生成，勿手改）
+     卡片 2 · 近期版本更新（内容由接口生成，勿手改）
      ================================================================================== -->
 <local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
     <StackPanel Margin="25,40,23,15">
