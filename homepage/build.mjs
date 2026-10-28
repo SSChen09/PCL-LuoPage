@@ -224,6 +224,27 @@ function stamp(d = new Date()) {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
+/**
+ * 「下次自动更新」时间。
+ * 必须和 .github/workflows/pages.yml 里的 cron 保持一致：
+ * cron 走的是 UTC，`17 20 * * *` = UTC 20:17 = 北京时间次日 04:17。
+ * 这里先按 UTC 算出下一次触发时刻，再折算成北京时间展示。
+ */
+const SCHEDULE = { utcHour: 20, utcMinute: 17 };
+
+function nextRun(now = new Date()) {
+  const next = new Date(Date.UTC(
+    now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
+    SCHEDULE.utcHour, SCHEDULE.utcMinute, 0,
+  ));
+  if (next.getTime() <= now.getTime()) next.setUTCDate(next.getUTCDate() + 1);
+
+  const bj = new Date(next.getTime() + 8 * 3600000);
+  const p = n => String(n).padStart(2, '0');
+  return `${bj.getUTCFullYear()}-${p(bj.getUTCMonth() + 1)}-${p(bj.getUTCDate())} `
+    + `${p(bj.getUTCHours())}:${p(bj.getUTCMinutes())}`;
+}
+
 async function main() {
   console.log('→ 拉取版本清单 …');
   const manifest = await fetchJson(ENDPOINT.manifest);
@@ -254,7 +275,8 @@ async function main() {
   const out = template
     .replace('@@CHANGELOG_ENTRIES@@', entries.map(e => e.xaml).join('\n\n'))
     .replace('@@SNAPSHOT_NOTE@@', snapshotNote)
-    .replace(/@@UPDATED_AT@@/g, stamp());
+    .replace(/@@UPDATED_AT@@/g, stamp())
+    .replace(/@@NEXT_UPDATE@@/g, nextRun());
 
   const leftover = out.match(/@@[A-Z_]+@@/g);
   if (leftover) console.warn(`[warn] 模板里还有未替换的占位符：${[...new Set(leftover)].join(', ')}`);

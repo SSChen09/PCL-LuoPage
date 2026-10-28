@@ -189,7 +189,7 @@
 @@SNAPSHOT_NOTE@@
 
         <local:MyHint Margin="0,2,0,12" Theme="Yellow"
-                      Text="本卡片由 homepage/build.mjs 自动生成：版本号、发布日期来自 Mojang 官方启动器接口，中文摘要来自 Minecraft Wiki 接口。&#xA;数据更新于 @@UPDATED_AT@@，重新执行一次脚本即可刷新。" />
+                      Text="本卡片由 homepage/build.mjs 自动生成：版本号与发布日期取自 Mojang 官方启动器接口，中文摘要取自 Minecraft Wiki 接口。&#xA;要加自己的条目，编辑 homepage/template.xaml 里的版本条目占位符位置即可。" />
 
         <StackPanel Orientation="Horizontal">
             <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
@@ -199,6 +199,39 @@
                             Text="PCL 启动器更新" EventType="打开网页"
                             EventData="https://github.com/Meloong-Git/PCL/releases" />
         </StackPanel>
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     页脚 · 本页更新时间（时间由 build.mjs 按 workflow 的 cron 计算）
+     ================================================================================== -->
+<local:MyCard Title="页面信息" CanSwap="False">
+    <StackPanel Margin="25,40,23,15">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
+                       Foreground="{DynamicResource ColorBrush1}" Text="@@UPDATED_AT@@" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontWeight="Bold"
+                       Foreground="{DynamicResource ColorBrush1}" Text="@@NEXT_UPDATE@@" />
+        </Grid>
+
+        <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" FontSize="11"
+                   Foreground="{DynamicResource ColorBrush4}"
+                   Text="时间均为北京时间。联网主页模式下由 GitHub Actions 每天 04:17 自动重建；本地使用时请运行 node homepage/build.mjs 手动刷新。" />
     </StackPanel>
 </local:MyCard>
 
