@@ -141,7 +141,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 00:32" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-28 16:38" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
