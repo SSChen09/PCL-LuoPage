@@ -1,0 +1,289 @@
+<!-- ==================================================================================
+     PCL 主页模板（首页骨架）
+     ==================================================================================
+     这个文件是「模板」，不是 PCL 实际读取的文件。
+     homepage/build.mjs 会把 @@xxx@@ 占位符替换成接口取回的真实数据，
+     再输出到：
+       - ../Custom.xaml          PCL 本地主页（直接生效）
+       - ./dist/Custom.xaml      联网主页用（上传到任意静态托管）
+
+     所以：改样式、改服务器列表，都改这个文件，别改生成的 Custom.xaml。
+     改完执行：node homepage/build.mjs
+     ================================================================================== -->
+
+
+<!-- ==================================================================================
+     卡片 1 · 服务器一键启动
+     ================================================================================== -->
+<local:MyCard Title="服务器一键启动" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+
+        <!-- 顶部：当前选中的服务器 + 选择按钮 -->
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}" Text="当前服务器" />
+
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       Foreground="{DynamicResource ColorBrush1}" Text="{variable:SrvName:Hypixel}" />
+
+            <!-- 下拉未展开时显示「选择」 -->
+            <local:MyButton Grid.Column="2" Height="32" Padding="16,0,16,0" ColorType="Highlight"
+                            Text="选择 ▾" Visibility="{variable:DropOpen:Collapsed}">
+                <local:CustomEventService.Events>
+                    <local:CustomEventCollection>
+                        <local:CustomEvent Type="修改变量" Data="DropOpen|Visible|-" />
+                        <local:CustomEvent Type="刷新页面" Data="-" />
+                    </local:CustomEventCollection>
+                </local:CustomEventService.Events>
+            </local:MyButton>
+
+            <!-- 下拉已展开时显示「收起」 -->
+            <local:MyButton Grid.Column="2" Height="32" Padding="16,0,16,0"
+                            Text="收起 ▴" Visibility="{variable:DropOpen:Visible}">
+                <local:CustomEventService.Events>
+                    <local:CustomEventCollection>
+                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
+                        <local:CustomEvent Type="刷新页面" Data="-" />
+                    </local:CustomEventCollection>
+                </local:CustomEventService.Events>
+            </local:MyButton>
+        </Grid>
+
+        <!-- 下拉列表（默认收起） -->
+        <StackPanel Visibility="{variable:DropOpen:Collapsed}" Margin="0,0,0,6">
+
+            <!-- SERVER-1 -->
+            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Grass.png"
+                              Title="Hypixel" Info="mc.hypixel.net · 推荐版本 1.16.3">
+                <local:CustomEventService.Events>
+                    <local:CustomEventCollection>
+                        <local:CustomEvent Type="修改变量" Data="SrvName|Hypixel|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv0|Visible|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv1|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv2|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv3|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
+                        <local:CustomEvent Type="刷新页面" Data="-" />
+                    </local:CustomEventCollection>
+                </local:CustomEventService.Events>
+            </local:MyListItem>
+
+            <!-- SERVER-2 -->
+            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/CommandBlock.png"
+                              Title="2B2T" Info="connect.2b2t.org · 无政府服务器，注意备份存档">
+                <local:CustomEventService.Events>
+                    <local:CustomEventCollection>
+                        <local:CustomEvent Type="修改变量" Data="SrvName|2B2T|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv0|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv1|Visible|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv2|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv3|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
+                        <local:CustomEvent Type="刷新页面" Data="-" />
+                    </local:CustomEventCollection>
+                </local:CustomEventService.Events>
+            </local:MyListItem>
+
+            <!-- SERVER-3 -->
+            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/GoldBlock.png"
+                              Title="本地联机测试" Info="localhost:25565 · 1.20.1 · 用于测试服务端与模组">
+                <local:CustomEventService.Events>
+                    <local:CustomEventCollection>
+                        <local:CustomEvent Type="修改变量" Data="SrvName|本地联机测试|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv0|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv1|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv2|Visible|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv3|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
+                        <local:CustomEvent Type="刷新页面" Data="-" />
+                    </local:CustomEventCollection>
+                </local:CustomEventService.Events>
+            </local:MyListItem>
+
+            <!-- SERVER-4（占位，改成你自己的服务器） -->
+            <local:MyListItem Margin="-5,0,-5,0" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Anvil.png"
+                              Title="我的服务器" Info="这里改成地址 · 修改下方启动按钮的 EventData">
+                <local:CustomEventService.Events>
+                    <local:CustomEventCollection>
+                        <local:CustomEvent Type="修改变量" Data="SrvName|我的服务器|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv0|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv1|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv2|Collapsed|-" />
+                        <local:CustomEvent Type="修改变量" Data="Srv3|Visible|-" />
+                        <local:CustomEvent Type="修改变量" Data="DropOpen|Collapsed|-" />
+                        <local:CustomEvent Type="刷新页面" Data="-" />
+                    </local:CustomEventCollection>
+                </local:CustomEventService.Events>
+            </local:MyListItem>
+
+        </StackPanel>
+
+        <!-- 启动按钮：同一时刻只显示与当前选择匹配的那一个 -->
+        <StackPanel Margin="0,4,0,0">
+            <local:MyButton Height="42" ColorType="Highlight" Text="启动 Hypixel"
+                            EventType="启动游戏" EventData="1.16.3|mc.hypixel.net"
+                            Visibility="{variable:Srv0:Visible}" />
+            <local:MyButton Height="42" ColorType="Highlight" Text="启动 2B2T"
+                            EventType="启动游戏" EventData="1.21.4|connect.2b2t.org"
+                            Visibility="{variable:Srv1:Collapsed}" />
+            <local:MyButton Height="42" ColorType="Highlight" Text="启动 本地联机测试"
+                            EventType="启动游戏" EventData="1.20.1|localhost:25565"
+                            Visibility="{variable:Srv2:Collapsed}" />
+            <local:MyButton Height="42" ColorType="Highlight" Text="启动 我的服务器"
+                            EventType="启动游戏" EventData="1.20.1|你的服务器地址"
+                            Visibility="{variable:Srv3:Collapsed}" />
+        </StackPanel>
+
+        <local:MyHint Margin="0,12,0,0" Theme="Blue"
+                      Text="启动前请确认 PCL 里已安装对应的游戏版本，版本号写在按钮的 EventData 中（格式：版本|地址）。&#xA;想增删服务器？编辑 homepage/template.xaml，搜索 SERVER- 即可定位。" />
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     卡片 2 · 内存优化
+     ================================================================================== -->
+<local:MyCard Title="内存优化" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+        <TextBlock TextWrapping="Wrap" Margin="0,0,0,12" FontSize="12"
+                   Foreground="{DynamicResource ColorBrush3}"
+                   Text="启动大型整合包前先跑一遍，能明显减少卡顿与内存溢出。两个操作互不影响，按需点击。" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <local:MyButton Grid.Column="0" Margin="0,0,8,0" Height="40" ColorType="Highlight"
+                            Text="一键内存优化" EventType="内存优化"
+                            ToolTip="释放被其他程序占用的闲置内存，不会影响正在运行的游戏" />
+            <local:MyButton Grid.Column="1" Margin="8,0,0,0" Height="40"
+                            Text="清理垃圾文件" EventType="清理垃圾"
+                            ToolTip="删除 PCL 的日志与缓存文件，不会删除游戏本体和存档" />
+        </Grid>
+
+        <local:MyHint Margin="0,12,0,0" Theme="Yellow"
+                      Text="内存优化：把系统里闲置的物理内存还给可用池，适合开游戏前点一下。&#xA;清理垃圾：清掉启动器产生的缓存和日志，占空间大了再点，别频繁点。" />
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     卡片 3 · 近期版本更新（内容由接口生成，勿手改）
+     ================================================================================== -->
+<local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+
+        <!-- 版本 26.3（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
+                           Text="26.3" />
+                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush2}" Text="奔赴荒野" />
+                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush4}" Text="2026-09-15" />
+            </StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="奔赴荒野的正式版，也是Java版的一次小更新，发布于2026年9月15日。此次更新新增了斑驳森林生物群系，加入了杨树及其系列方块，以及相关自然方块，另加入了台阶和楼梯的羊毛和混凝土材质变种、坐垫和麦秆床，以及废…" />
+        </StackPanel>
+
+        <!-- 版本 26.2（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
+                           Text="26.2" />
+                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush2}" Text="混沌立方" />
+                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush4}" Text="2026-06-16" />
+            </StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="混沌立方的正式版，也是Java版的一次小更新，发布于2026年6月16日。此次更新加入了硫黄洞穴、硫黄、朱砂和硫方怪等内容，并修复了一些漏洞。" />
+        </StackPanel>
+
+        <!-- 版本 26.1.2（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
+                           Text="26.1.2" />
+                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush2}" Text="热修复" />
+                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush4}" Text="2026-04-09" />
+            </StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="Java版的一次热修复更新，发布于2026年4月9日，修复了一些严重漏洞。此版本兼容26.1和26.1.1的服务端。" />
+        </StackPanel>
+
+        <!-- 版本 26.1.1（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
+                           Text="26.1.1" />
+                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush2}" Text="热修复" />
+                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
+                           Foreground="{DynamicResource ColorBrush4}" Text="2026-04-01" />
+            </StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="Java版的一次热修复更新，发布于2026年4月1日，修复了1个严重漏洞。此版本兼容26.1的服务端。" />
+        </StackPanel>
+
+        <local:MyHint Theme="Blue" Margin="0,0,0,12"
+                      Text="最新快照 26.4-snapshot-6 · 2026-10-27 · 想尝鲜可以在 PCL 的「下载 → 自动安装」里选择快照版本。" />
+
+        <local:MyHint Margin="0,2,0,12" Theme="Yellow"
+                      Text="本卡片由 homepage/build.mjs 自动生成：版本号、发布日期来自 Mojang 官方启动器接口，中文摘要来自 Minecraft Wiki 接口。&#xA;数据更新于 2026-10-29 00:19，重新执行一次脚本即可刷新。" />
+
+        <StackPanel Orientation="Horizontal">
+            <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
+                            Text="查看完整更新日志" EventType="打开网页"
+                            EventData="https://zh.minecraft.wiki/w/Java版版本记录" />
+            <local:MyButton Height="34" Padding="18,0,18,0"
+                            Text="PCL 启动器更新" EventType="打开网页"
+                            EventData="https://github.com/Meloong-Git/PCL/releases" />
+        </StackPanel>
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     常用属性速查（写新卡片时对照着抄）
+     ==================================================================================
+     通用：Width / Height / Margin（左,上,右,下）/ ToolTip / HorizontalAlignment
+           (Left|Center|Right|Stretch) / VerticalAlignment / IsHitTestVisible
+     文本 TextBlock：Text、TextWrapping="Wrap"、FontSize、FontWeight="Bold"、Foreground
+     图片 MyImage：Source（网址或 pack:// 内置路径）、FallbackSource、EnableCache
+     卡片 MyCard：Title、CanSwap、IsSwapped、UseAnimation、SwapLogoRight、HasMouseAnimation
+     提示条 MyHint：Text、Theme（Blue | Yellow | Red）
+     按钮 MyButton：Text、Padding、ColorType（Highlight | Red | 默认黑）、EventType、EventData
+     文本按钮 MyTextButton：Text、EventType、EventData
+     列表项 MyListItem：Logo、Title、Info、Type（Clickable 才能点）
+     图标按钮 MyIconTextButton：Text、Logo（SVG Path）、LogoScale、ColorType
+     图标按钮 MyIconButton：Logo、LogoScale、Theme（Color | White | Black | Red）
+     主题色：{DynamicResource ColorBrush1} ~ {DynamicResource ColorBrush8}（1 最深，8 最浅）
+
+     事件类型速查：
+       打开网页、打开文件、打开帮助、启动游戏、复制文本、下载文件、
+       弹出窗口、内存优化、清理垃圾、修改变量、刷新页面
+       - 启动游戏 EventData："版本|地址"
+       - 弹出窗口 EventData："标题|内容"
+       - 修改变量 EventData："变量名|值|-"
+
+     注意：XML 注释内不能出现连续两个连字符，否则 PCL 解析失败白屏。
+     ================================================================================== -->
