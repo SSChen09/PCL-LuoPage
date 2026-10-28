@@ -1,0 +1,64 @@
+# PCL 主页自动构建 + 发布到 GitHub Pages
+#
+# 首次使用要做两件事：
+#   1. 仓库 Settings → Pages → Build and deployment → Source 选「GitHub Actions」
+#   2. PCL 里：设置 → 个性化 → 主页 → 来源选「联网」，地址填
+#      https://sschen09.github.io/PCL-LuoPage/Custom.xaml
+#
+# 之后每天北京时间 04:17 自动重建一次（有新版本才看得出变化），
+# 也可以在 Actions 页面点「Run workflow」手动触发。
+
+name: Build & Deploy PCL Homepage
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 20 * * *"   # UTC 20:17 = 北京时间次日 04:17
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: 生成 Custom.xaml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 抓取版本数据并渲染
+        run: node homepage/build.mjs --no-local
+
+      - name: 校验产物
+        run: |
+          test -s homepage/dist/Custom.xaml
+          grep -q "local:MyCard" homepage/dist/Custom.xaml
+          echo "生成成功，大小 $(wc -c < homepage/dist/Custom.xaml) 字节"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: homepage/dist
+
+  deploy:
+    name: 发布到 Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

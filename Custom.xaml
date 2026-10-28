@@ -248,7 +248,7 @@
                       Text="最新快照 26.4-snapshot-6 · 2026-10-27 · 想尝鲜可以在 PCL 的「下载 → 自动安装」里选择快照版本。" />
 
         <local:MyHint Margin="0,2,0,12" Theme="Yellow"
-                      Text="本卡片由 homepage/build.mjs 自动生成：版本号、发布日期来自 Mojang 官方启动器接口，中文摘要来自 Minecraft Wiki 接口。&#xA;数据更新于 2026-10-29 00:19，重新执行一次脚本即可刷新。" />
+                      Text="本卡片由 homepage/build.mjs 自动生成：版本号、发布日期来自 Mojang 官方启动器接口，中文摘要来自 Minecraft Wiki 接口。&#xA;数据更新于 2026-10-29 00:24，重新执行一次脚本即可刷新。" />
 
         <StackPanel Orientation="Horizontal">
             <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
