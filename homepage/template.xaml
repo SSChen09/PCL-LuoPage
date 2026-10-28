@@ -38,9 +38,29 @@
 
 
 <!-- ==================================================================================
-     卡片 2 · 运维专区（版本号由接口生成，勿手改）
+     卡片 2 · 近期版本更新（内容由接口生成，勿手改）
      ================================================================================== -->
-<local:MyCard Title="运维专区" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+<local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+
+@@CHANGELOG_ENTRIES@@
+
+        <StackPanel Orientation="Horizontal">
+            <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
+                            Text="查看完整更新日志" EventType="打开网页"
+                            EventData="https://zh.minecraft.wiki/w/Java版版本记录" />
+            <local:MyButton Height="34" Padding="18,0,18,0"
+                            Text="PCL 启动器更新" EventType="打开网页"
+                            EventData="https://github.com/Meloong-Git/PCL/releases" />
+        </StackPanel>
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     卡片 3 · 运维专区（版本号由接口生成，勿手改）
+     ================================================================================== -->
+<local:MyCard Title="运维专区" Margin="0,0,0,15" CanSwap="True" IsSwapped="True">
     <StackPanel Margin="25,40,23,15">
 
         <TextBlock Margin="0,0,0,4" FontSize="12" FontWeight="Bold"
@@ -72,26 +92,6 @@
             </Grid.RowDefinitions>
 @@OPS_SERVERS@@
         </Grid>
-    </StackPanel>
-</local:MyCard>
-
-
-<!-- ==================================================================================
-     卡片 3 · 近期版本更新（内容由接口生成，勿手改）
-     ================================================================================== -->
-<local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
-    <StackPanel Margin="25,40,23,15">
-
-@@CHANGELOG_ENTRIES@@
-
-        <StackPanel Orientation="Horizontal">
-            <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
-                            Text="查看完整更新日志" EventType="打开网页"
-                            EventData="https://zh.minecraft.wiki/w/Java版版本记录" />
-            <local:MyButton Height="34" Padding="18,0,18,0"
-                            Text="PCL 启动器更新" EventType="打开网页"
-                            EventData="https://github.com/Meloong-Git/PCL/releases" />
-        </StackPanel>
     </StackPanel>
 </local:MyCard>
 

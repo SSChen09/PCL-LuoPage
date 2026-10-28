@@ -38,9 +38,79 @@
 
 
 <!-- ==================================================================================
-     卡片 2 · 运维专区（版本号由接口生成，勿手改）
+     卡片 2 · 近期版本更新（内容由接口生成，勿手改）
      ================================================================================== -->
-<local:MyCard Title="运维专区" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+<local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
+    <StackPanel Margin="25,40,23,15">
+
+        <!-- 版本 26.3（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Grass.png"
+                              Title="26.3 · 奔赴荒野"
+                              Info="2026-09-15 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.3"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.3" />
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="奔赴荒野的正式版，也是Java版的一次小更新，发布于2026年9月15日。此次更新新增了斑驳森林生物群系，加入了杨树及其系列方块，以及相关自然方块，另加入了台阶和楼梯的羊毛和混凝土材质变种、坐垫和麦秆床，以及废…" />
+        </StackPanel>
+
+        <!-- 版本 26.2（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/CommandBlock.png"
+                              Title="26.2 · 混沌立方"
+                              Info="2026-06-16 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.2"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.2" />
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="混沌立方的正式版，也是Java版的一次小更新，发布于2026年6月16日。此次更新加入了硫黄洞穴、硫黄、朱砂和硫方怪等内容，并修复了一些漏洞。" />
+        </StackPanel>
+
+        <!-- 版本 26.1.2（release，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/GoldBlock.png"
+                              Title="26.1.2 · 热修复"
+                              Info="2026-04-09 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.1.2"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.1.2" />
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="Java版的一次热修复更新，发布于2026年4月9日，修复了一些严重漏洞。此版本兼容26.1和26.1.1的服务端。" />
+        </StackPanel>
+
+        <!-- 版本 26.4-snapshot-6（snapshot，数据源 Mojang + Wiki） -->
+        <StackPanel Margin="0,0,0,14">
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Anvil.png"
+                              Title="26.4-snapshot-6 · 第6个快照"
+                              Info="2026-10-27 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.4-snapshot-6"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.4-snapshot-6" />
+            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
+                       Foreground="{DynamicResource ColorBrush3}"
+                       Text="Java版26.4的第6个快照，发布于2026年10月27日，加入了雪砖系列方块和新的硫方怪原型，并修复了一些漏洞。" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
+                            Text="查看完整更新日志" EventType="打开网页"
+                            EventData="https://zh.minecraft.wiki/w/Java版版本记录" />
+            <local:MyButton Height="34" Padding="18,0,18,0"
+                            Text="PCL 启动器更新" EventType="打开网页"
+                            EventData="https://github.com/Meloong-Git/PCL/releases" />
+        </StackPanel>
+    </StackPanel>
+</local:MyCard>
+
+
+<!-- ==================================================================================
+     卡片 3 · 运维专区（版本号由接口生成，勿手改）
+     ================================================================================== -->
+<local:MyCard Title="运维专区" Margin="0,0,0,15" CanSwap="True" IsSwapped="True">
     <StackPanel Margin="25,40,23,15">
 
         <TextBlock Margin="0,0,0,4" FontSize="12" FontWeight="Bold"
@@ -123,76 +193,6 @@
 
 
 <!-- ==================================================================================
-     卡片 3 · 近期版本更新（内容由接口生成，勿手改）
-     ================================================================================== -->
-<local:MyCard Title="近期版本更新" Margin="0,0,0,15" CanSwap="True" IsSwapped="False">
-    <StackPanel Margin="25,40,23,15">
-
-        <!-- 版本 26.3（release，数据源 Mojang + Wiki） -->
-        <StackPanel Margin="0,0,0,14">
-            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/Grass.png"
-                              Title="26.3 · 奔赴荒野"
-                              Info="2026-09-15 · 点击打开 Wiki 词条"
-                              ToolTip="在 Minecraft Wiki 上查看 26.3"
-                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.3" />
-            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
-                       Foreground="{DynamicResource ColorBrush3}"
-                       Text="奔赴荒野的正式版，也是Java版的一次小更新，发布于2026年9月15日。此次更新新增了斑驳森林生物群系，加入了杨树及其系列方块，以及相关自然方块，另加入了台阶和楼梯的羊毛和混凝土材质变种、坐垫和麦秆床，以及废…" />
-        </StackPanel>
-
-        <!-- 版本 26.2（release，数据源 Mojang + Wiki） -->
-        <StackPanel Margin="0,0,0,14">
-            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/CommandBlock.png"
-                              Title="26.2 · 混沌立方"
-                              Info="2026-06-16 · 点击打开 Wiki 词条"
-                              ToolTip="在 Minecraft Wiki 上查看 26.2"
-                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.2" />
-            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
-                       Foreground="{DynamicResource ColorBrush3}"
-                       Text="混沌立方的正式版，也是Java版的一次小更新，发布于2026年6月16日。此次更新加入了硫黄洞穴、硫黄、朱砂和硫方怪等内容，并修复了一些漏洞。" />
-        </StackPanel>
-
-        <!-- 版本 26.1.2（release，数据源 Mojang + Wiki） -->
-        <StackPanel Margin="0,0,0,14">
-            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/GoldBlock.png"
-                              Title="26.1.2 · 热修复"
-                              Info="2026-04-09 · 点击打开 Wiki 词条"
-                              ToolTip="在 Minecraft Wiki 上查看 26.1.2"
-                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.1.2" />
-            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
-                       Foreground="{DynamicResource ColorBrush3}"
-                       Text="Java版的一次热修复更新，发布于2026年4月9日，修复了一些严重漏洞。此版本兼容26.1和26.1.1的服务端。" />
-        </StackPanel>
-
-        <!-- 版本 26.4-snapshot-6（snapshot，数据源 Mojang + Wiki） -->
-        <StackPanel Margin="0,0,0,14">
-            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
-                              Logo="pack://application:,,,/images/Blocks/Anvil.png"
-                              Title="26.4-snapshot-6 · 第6个快照"
-                              Info="2026-10-27 · 点击打开 Wiki 词条"
-                              ToolTip="在 Minecraft Wiki 上查看 26.4-snapshot-6"
-                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.4-snapshot-6" />
-            <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
-                       Foreground="{DynamicResource ColorBrush3}"
-                       Text="Java版26.4的第6个快照，发布于2026年10月27日，加入了雪砖系列方块和新的硫方怪原型，并修复了一些漏洞。" />
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal">
-            <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
-                            Text="查看完整更新日志" EventType="打开网页"
-                            EventData="https://zh.minecraft.wiki/w/Java版版本记录" />
-            <local:MyButton Height="34" Padding="18,0,18,0"
-                            Text="PCL 启动器更新" EventType="打开网页"
-                            EventData="https://github.com/Meloong-Git/PCL/releases" />
-        </StackPanel>
-    </StackPanel>
-</local:MyCard>
-
-
-<!-- ==================================================================================
      页脚 · 本页更新时间（时间由 build.mjs 按 workflow 的 cron 计算）
      ================================================================================== -->
 <local:MyCard Title="页面信息" CanSwap="False">
@@ -217,7 +217,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 01:05" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 01:09" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
