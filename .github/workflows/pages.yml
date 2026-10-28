@@ -63,6 +63,10 @@ jobs:
           fi
 
       - uses: actions/configure-pages@v5
+        with:
+          # 尝试自动为仓库启用 Pages（省去手动去 Settings 点一次）。
+          # 若 GITHUB_TOKEN 权限不足会自动回退，届时仍需手动开启。
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
