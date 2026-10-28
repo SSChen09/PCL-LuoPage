@@ -51,7 +51,7 @@
 @@SNAPSHOT_NOTE@@
 
         <local:MyHint Margin="0,2,0,12" Theme="Yellow"
-                      Text="本卡片由 homepage/build.mjs 自动生成：版本号与发布日期取自 Mojang 官方启动器接口，中文摘要取自 Minecraft Wiki 接口。&#xA;要加自己的条目，编辑 homepage/template.xaml 里的版本条目占位符位置即可。" />
+                      Text="点击任意版本标题，可直接打开该版本在 Minecraft Wiki 上的中文词条。&#xA;本卡片由 homepage/build.mjs 自动生成：版本号与发布日期取自 Mojang 官方启动器接口，中文摘要取自 Minecraft Wiki 接口。" />
 
         <StackPanel Orientation="Horizontal">
             <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"

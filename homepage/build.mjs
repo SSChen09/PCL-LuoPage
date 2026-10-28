@@ -178,7 +178,22 @@ async function zhSummary(version) {
   }
 }
 
-async function buildEntry(entry) {
+/** 版本条目前面挂的方块图标，按顺序轮换，避免四条长得一模一样 */
+const LOGOS = [
+  'pack://application:,,,/images/Blocks/Grass.png',
+  'pack://application:,,,/images/Blocks/CommandBlock.png',
+  'pack://application:,,,/images/Blocks/GoldBlock.png',
+  'pack://application:,,,/images/Blocks/Anvil.png',
+  'pack://application:,,,/images/Blocks/RedstoneBlock.png',
+  'pack://application:,,,/images/Blocks/Cobblestone.png',
+];
+
+/** 对应版本的中文 Wiki 词条，例：https://zh.minecraft.wiki/w/Java版26.3（已验证可达） */
+function wikiUrl(version) {
+  return `https://zh.minecraft.wiki/w/Java%E7%89%88${encodeURIComponent(version)}`;
+}
+
+async function buildEntry(entry, index = 0) {
   const version = entry.version;
   const date = String(entry.date ?? '').slice(0, 10);
 
@@ -191,7 +206,8 @@ async function buildEntry(entry) {
   const rawZh = zh ? stripVersionLead(zh, version) : '';
   const summary = clip(rawZh || enIntro || entry.shortText || '暂无摘要', rawZh ? 105 : 130);
   const codename = zhCodename(zh) || fallbackLabel(summary, entry.type);
-  const tagColor = entry.type === 'snapshot' ? 'ColorBrush4' : 'ColorBrush2';
+  const url = wikiUrl(version);
+  const logo = LOGOS[index % LOGOS.length];
 
   return {
     version,
@@ -199,17 +215,18 @@ async function buildEntry(entry) {
     summary,
     codename,
     type: entry.type,
+    url,
     source: zh ? 'wiki' : 'mojang',
+    // 版本标题做成 MyListItem：PCL 里只有它（和按钮类）支持点击事件，
+    // 摘要仍用 TextBlock 放在下面，保证长文本能自动换行不被截断。
     xaml: `        <!-- 版本 ${esc(version)}（${entry.type}，数据源 ${zh ? 'Mojang + Wiki' : 'Mojang'}） -->
         <StackPanel Margin="0,0,0,14">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
-                           Text="${esc(version)}" />
-                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ${tagColor}}" Text="${esc(codename)}" />
-                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush4}" Text="${esc(date)}" />
-            </StackPanel>
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="${logo}"
+                              Title="${esc(version)} · ${esc(codename)}"
+                              Info="${esc(date)} · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 ${esc(version)}"
+                              EventType="打开网页" EventData="${esc(url)}" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
                        Text="${esc(summary)}" />
@@ -261,7 +278,7 @@ async function main() {
   console.log(`→ 抓取 ${picked.length} 个版本的摘要 …`);
   const entries = [];
   for (const item of picked) {
-    const e = await buildEntry(item);
+    const e = await buildEntry(item, entries.length);
     entries.push(e);
     console.log(`   ${e.version.padEnd(18)} ${e.date}  ${e.codename}  [${e.source}]`);
   }

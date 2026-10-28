@@ -48,14 +48,12 @@
 
         <!-- 版本 26.3（release，数据源 Mojang + Wiki） -->
         <StackPanel Margin="0,0,0,14">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
-                           Text="26.3" />
-                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush2}" Text="奔赴荒野" />
-                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush4}" Text="2026-09-15" />
-            </StackPanel>
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Grass.png"
+                              Title="26.3 · 奔赴荒野"
+                              Info="2026-09-15 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.3"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.3" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
                        Text="奔赴荒野的正式版，也是Java版的一次小更新，发布于2026年9月15日。此次更新新增了斑驳森林生物群系，加入了杨树及其系列方块，以及相关自然方块，另加入了台阶和楼梯的羊毛和混凝土材质变种、坐垫和麦秆床，以及废…" />
@@ -63,14 +61,12 @@
 
         <!-- 版本 26.2（release，数据源 Mojang + Wiki） -->
         <StackPanel Margin="0,0,0,14">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
-                           Text="26.2" />
-                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush2}" Text="混沌立方" />
-                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush4}" Text="2026-06-16" />
-            </StackPanel>
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/CommandBlock.png"
+                              Title="26.2 · 混沌立方"
+                              Info="2026-06-16 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.2"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.2" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
                        Text="混沌立方的正式版，也是Java版的一次小更新，发布于2026年6月16日。此次更新加入了硫黄洞穴、硫黄、朱砂和硫方怪等内容，并修复了一些漏洞。" />
@@ -78,14 +74,12 @@
 
         <!-- 版本 26.1.2（release，数据源 Mojang + Wiki） -->
         <StackPanel Margin="0,0,0,14">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
-                           Text="26.1.2" />
-                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush2}" Text="热修复" />
-                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush4}" Text="2026-04-09" />
-            </StackPanel>
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/GoldBlock.png"
+                              Title="26.1.2 · 热修复"
+                              Info="2026-04-09 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.1.2"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.1.2" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
                        Text="Java版的一次热修复更新，发布于2026年4月9日，修复了一些严重漏洞。此版本兼容26.1和26.1.1的服务端。" />
@@ -93,14 +87,12 @@
 
         <!-- 版本 26.1.1（release，数据源 Mojang + Wiki） -->
         <StackPanel Margin="0,0,0,14">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontWeight="Bold" FontSize="13" Foreground="{DynamicResource ColorBrush1}"
-                           Text="26.1.1" />
-                <TextBlock Margin="8,0,0,0" FontSize="12" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush2}" Text="热修复" />
-                <TextBlock Margin="8,0,0,0" FontSize="11" VerticalAlignment="Center"
-                           Foreground="{DynamicResource ColorBrush4}" Text="2026-04-01" />
-            </StackPanel>
+            <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
+                              Logo="pack://application:,,,/images/Blocks/Anvil.png"
+                              Title="26.1.1 · 热修复"
+                              Info="2026-04-01 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.1.1"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.1.1" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
                        Text="Java版的一次热修复更新，发布于2026年4月1日，修复了1个严重漏洞。此版本兼容26.1的服务端。" />
@@ -110,7 +102,7 @@
                       Text="最新快照 26.4-snapshot-6 · 2026-10-27 · 想尝鲜可以在 PCL 的「下载 → 自动安装」里选择快照版本。" />
 
         <local:MyHint Margin="0,2,0,12" Theme="Yellow"
-                      Text="本卡片由 homepage/build.mjs 自动生成：版本号与发布日期取自 Mojang 官方启动器接口，中文摘要取自 Minecraft Wiki 接口。&#xA;要加自己的条目，编辑 homepage/template.xaml 里的版本条目占位符位置即可。" />
+                      Text="点击任意版本标题，可直接打开该版本在 Minecraft Wiki 上的中文词条。&#xA;本卡片由 homepage/build.mjs 自动生成：版本号与发布日期取自 Mojang 官方启动器接口，中文摘要取自 Minecraft Wiki 接口。" />
 
         <StackPanel Orientation="Horizontal">
             <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
@@ -149,7 +141,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 00:30" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 00:32" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
