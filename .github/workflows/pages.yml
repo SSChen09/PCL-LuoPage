@@ -7,6 +7,10 @@
 #
 # 之后每天北京时间 04:17 自动重建一次（有新版本才看得出变化），
 # 也可以在 Actions 页面点「Run workflow」手动触发。
+#
+# 每次构建完会把 Custom.xaml 提交回仓库：
+#   一是让仓库里的副本保持最新，二是公开仓库连续 60 天无活动会被 GitHub
+#   自动停用定时任务，这些提交正好让它保持活跃。
 
 name: Build & Deploy PCL Homepage
 
@@ -18,7 +22,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # 需要写权限把生成结果提交回去，顺便避免 60 天闲置被停用
   pages: write
   id-token: write
 
@@ -38,13 +42,25 @@ jobs:
           node-version: "22"
 
       - name: 抓取版本数据并渲染
-        run: node homepage/build.mjs --no-local
+        run: node homepage/build.mjs
 
       - name: 校验产物
         run: |
           test -s homepage/dist/Custom.xaml
           grep -q "local:MyCard" homepage/dist/Custom.xaml
           echo "生成成功，大小 $(wc -c < homepage/dist/Custom.xaml) 字节"
+
+      - name: 提交生成结果
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Custom.xaml homepage/dist/Custom.xaml
+          if git diff --cached --quiet; then
+            echo "内容无变化，跳过提交"
+          else
+            git commit -m "chore: 自动更新主页数据"
+            git push
+          fi
 
       - uses: actions/configure-pages@v5
 
