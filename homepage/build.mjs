@@ -13,11 +13,11 @@
  *      → 该版本的中文摘要（Mojang 接口只有英文，故用 Wiki 补中文）
  *
  * 用法：
- *   node homepage/build.mjs                 默认：抓 4 个最新正式版，同时写本地 Custom.xaml 和 dist
- *   node homepage/build.mjs --limit=6       抓 6 个
+ *   node homepage/build.mjs                 默认：3 个最新正式版 + 1 个最新快照
+ *   node homepage/build.mjs --limit=5       正式版数量改成 5 个
+ *   node homepage/build.mjs --no-snapshot   不要快照条目，只留正式版
  *   node homepage/build.mjs --no-local      只写 dist/Custom.xaml（联网主页用），不动本地主页
  *   node homepage/build.mjs --no-wiki       不调 Wiki，纯英文摘要（更快，少一个依赖）
- *   node homepage/build.mjs --snapshots     额外把快照也算进列表
  *   node homepage/build.mjs --out=x.xaml    自定义输出路径
  *
  * 产物：
@@ -45,18 +45,18 @@ const UA = 'PCL-CustomHomepage-Builder/1.0 (local script)';
 /* ------------------------------------------------------------------ 参数 */
 
 const opt = {
-  limit: 4,
+  limit: 3,        // 正式版条数
+  snapshot: true,  // 是否在正式版之后追加 1 个最新快照
   local: true,
   wiki: true,
-  snapshots: false,
   out: resolve(HERE, 'dist/Custom.xaml'),
 };
 
 for (const arg of process.argv.slice(2)) {
   if (arg === '--no-local') opt.local = false;
   else if (arg === '--no-wiki') opt.wiki = false;
-  else if (arg === '--snapshots') opt.snapshots = true;
-  else if (arg.startsWith('--limit=')) opt.limit = Math.max(1, Math.min(12, parseInt(arg.slice(8), 10) || 4));
+  else if (arg === '--no-snapshot') opt.snapshot = false;
+  else if (arg.startsWith('--limit=')) opt.limit = Math.max(1, Math.min(12, parseInt(arg.slice(8), 10) || 3));
   else if (arg.startsWith('--out=')) opt.out = resolve(arg.slice(6));
   else if (arg === '-h' || arg === '--help') {
     console.log(await readFile(new URL(import.meta.url), 'utf8').then(s => s.split('*/')[0]));
@@ -205,7 +205,10 @@ async function buildEntry(entry, index = 0) {
   const enIntro = patch?.body ? firstParagraph(patch.body) : '';
   const rawZh = zh ? stripVersionLead(zh, version) : '';
   const summary = clip(rawZh || enIntro || entry.shortText || '暂无摘要', rawZh ? 105 : 130);
-  const codename = zhCodename(zh) || fallbackLabel(summary, entry.type);
+  // 快照没有「某某的正式版」这种代号，Wiki 里写的是「Java版26.4的第6个快照」，取「第6个快照」即可
+  const codename = entry.type === 'snapshot'
+    ? (zh.match(/第\s*\d+\s*个快照/) || ['快照'])[0]
+    : (zhCodename(zh) || fallbackLabel(summary, entry.type));
   const url = wikiUrl(version);
   const logo = LOGOS[index % LOGOS.length];
 
@@ -276,11 +279,14 @@ async function main() {
   if (!all.length) throw new Error('版本清单为空，接口结构可能变了');
 
   const byDate = (a, b) => String(b.date).localeCompare(String(a.date));
-  const wanted = opt.snapshots ? all : all.filter(e => e.type === 'release');
-  const picked = wanted.sort(byDate).slice(0, opt.limit);
-  if (!picked.length) throw new Error('没筛出可用版本，试试加 --snapshots');
+  const picked = all.filter(e => e.type === 'release').sort(byDate).slice(0, opt.limit);
 
-  const latestSnapshot = all.filter(e => e.type === 'snapshot').sort(byDate)[0];
+  // 快照单独追加在正式版后面，不参与 limit 的排序，避免把正式版挤掉
+  if (opt.snapshot) {
+    const latestSnapshot = all.filter(e => e.type === 'snapshot').sort(byDate)[0];
+    if (latestSnapshot) picked.push(latestSnapshot);
+  }
+  if (!picked.length) throw new Error('没筛出可用版本，检查接口结构是否变化');
 
   console.log(`→ 抓取 ${picked.length} 个版本的摘要 …`);
   const entries = [];
@@ -290,15 +296,9 @@ async function main() {
     console.log(`   ${e.version.padEnd(18)} ${e.date}  ${e.codename}  [${e.source}]`);
   }
 
-  const snapshotNote = latestSnapshot
-    ? `        <local:MyHint Theme="Blue" Margin="0,0,0,12"
-                      Text="最新快照 ${esc(latestSnapshot.version)} · ${esc(String(latestSnapshot.date).slice(0, 10))} · 想尝鲜可以在 PCL 的「下载 → 自动安装」里选择快照版本。" />`
-    : '';
-
   const template = await readFile(resolve(HERE, 'template.xaml'), 'utf8');
   const out = template
     .replace('@@CHANGELOG_ENTRIES@@', entries.map(e => e.xaml).join('\n\n'))
-    .replace('@@SNAPSHOT_NOTE@@', snapshotNote)
     .replace(/@@UPDATED_AT@@/g, stamp())
     .replace(/@@NEXT_UPDATE@@/g, nextRun());
 

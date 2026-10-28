@@ -33,9 +33,6 @@
                             Text="清理垃圾文件" EventType="清理垃圾"
                             ToolTip="删除 PCL 的日志与缓存文件，不会删除游戏本体和存档" />
         </Grid>
-
-        <local:MyHint Margin="0,12,0,0" Theme="Yellow"
-                      Text="内存优化：把系统里闲置的物理内存还给可用池，适合开游戏前点一下。&#xA;清理垃圾：清掉启动器产生的缓存和日志，占空间大了再点，别频繁点。" />
     </StackPanel>
 </local:MyCard>
 
@@ -85,24 +82,18 @@
                        Text="Java版的一次热修复更新，发布于2026年4月9日，修复了一些严重漏洞。此版本兼容26.1和26.1.1的服务端。" />
         </StackPanel>
 
-        <!-- 版本 26.1.1（release，数据源 Mojang + Wiki） -->
+        <!-- 版本 26.4-snapshot-6（snapshot，数据源 Mojang + Wiki） -->
         <StackPanel Margin="0,0,0,14">
             <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
                               Logo="pack://application:,,,/images/Blocks/Anvil.png"
-                              Title="26.1.1 · 热修复"
-                              Info="2026-04-01 · 点击打开 Wiki 词条"
-                              ToolTip="在 Minecraft Wiki 上查看 26.1.1"
-                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.1.1" />
+                              Title="26.4-snapshot-6 · 第6个快照"
+                              Info="2026-10-27 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.4-snapshot-6"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.4-snapshot-6" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
-                       Text="Java版的一次热修复更新，发布于2026年4月1日，修复了1个严重漏洞。此版本兼容26.1的服务端。" />
+                       Text="Java版26.4的第6个快照，发布于2026年10月27日，加入了雪砖系列方块和新的硫方怪原型，并修复了一些漏洞。" />
         </StackPanel>
-
-        <local:MyHint Theme="Blue" Margin="0,0,0,12"
-                      Text="最新快照 26.4-snapshot-6 · 2026-10-27 · 想尝鲜可以在 PCL 的「下载 → 自动安装」里选择快照版本。" />
-
-        <local:MyHint Margin="0,2,0,12" Theme="Yellow"
-                      Text="点击任意版本标题，可直接打开该版本在 Minecraft Wiki 上的中文词条。&#xA;本卡片由 homepage/build.mjs 自动生成：版本号与发布日期取自 Mojang 官方启动器接口，中文摘要取自 Minecraft Wiki 接口。" />
 
         <StackPanel Orientation="Horizontal">
             <local:MyButton Margin="0,0,10,0" Height="34" Padding="18,0,18,0" ColorType="Highlight"
@@ -141,7 +132,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 00:47" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-10-29 00:56" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
@@ -154,10 +145,6 @@
                             ColorType="Highlight" Text="刷新页面" EventType="刷新页面"
                             ToolTip="重新加载当前主页内容" />
         </Grid>
-
-        <TextBlock TextWrapping="Wrap" Margin="0,10,0,0" FontSize="11"
-                   Foreground="{DynamicResource ColorBrush4}"
-                   Text="时间均为北京时间。联网主页模式下由 GitHub Actions 每天 04:17 自动重建；本地使用时请运行 node homepage/build.mjs 手动刷新。" />
     </StackPanel>
 </local:MyCard>
 
