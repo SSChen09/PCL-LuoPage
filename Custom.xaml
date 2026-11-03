@@ -134,7 +134,7 @@
             <local:MyListItem Grid.Row="0" Grid.Column="1"
                               Margin="-5,0,-5,0" Type="Clickable"
                               Logo="pack://application:,,,/images/Blocks/Anvil.png"
-                              Title="Forge" Info="26.3-66.1.2"
+                              Title="Forge" Info="26.3-66.1.5"
                               ToolTip="打开 Forge 官网"
                               EventType="打开网页" EventData="https://files.minecraftforge.net/" />
             <local:MyListItem Grid.Row="0" Grid.Column="2"
@@ -217,12 +217,12 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-02 07:40" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-03 10:25" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
                 <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-03 04:17" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-04 04:17" />
             </Grid>
 
             <!-- 右：刷新按钮 -->
