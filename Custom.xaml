@@ -82,17 +82,17 @@
                        Text="Java版的一次热修复更新，发布于2026年4月9日，修复了一些严重漏洞。此版本兼容26.1和26.1.1的服务端。" />
         </StackPanel>
 
-        <!-- 版本 26.4-snapshot-6（snapshot，数据源 Mojang + Wiki） -->
+        <!-- 版本 26.4-snapshot-7（snapshot，数据源 Mojang + Wiki） -->
         <StackPanel Margin="0,0,0,14">
             <local:MyListItem Margin="-5,0,-5,2" Type="Clickable"
                               Logo="pack://application:,,,/images/Blocks/Anvil.png"
-                              Title="26.4-snapshot-6 · 第6个快照"
-                              Info="2026-10-27 · 点击打开 Wiki 词条"
-                              ToolTip="在 Minecraft Wiki 上查看 26.4-snapshot-6"
-                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.4-snapshot-6" />
+                              Title="26.4-snapshot-7 · 第7个快照"
+                              Info="2026-11-03 · 点击打开 Wiki 词条"
+                              ToolTip="在 Minecraft Wiki 上查看 26.4-snapshot-7"
+                              EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.4-snapshot-7" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
-                       Text="Java版26.4的第6个快照，发布于2026年10月27日，加入了雪砖系列方块和新的硫方怪原型，并修复了一些漏洞。" />
+                       Text="Java版26.4的第7个快照，发布于2026年11月3日，加入了方解石系列方块、雕纹灵魂页岩和新的音乐唱片，更改了全景图，并修复了一些漏洞。" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -217,12 +217,12 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-03 10:25" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-04 08:39" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
                 <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-04 04:17" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-05 04:17" />
             </Grid>
 
             <!-- 右：刷新按钮 -->
