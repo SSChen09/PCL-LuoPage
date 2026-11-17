@@ -92,7 +92,7 @@
                               EventType="打开网页" EventData="https://zh.minecraft.wiki/w/Java%E7%89%8826.4-snapshot-8" />
             <TextBlock TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12"
                        Foreground="{DynamicResource ColorBrush3}"
-                       Text="Java版26.4的第8个快照，发布于2026年11月10日，修复了一些漏洞。" />
+                       Text="Java版26.4的第8个快照，发布于2026年11月10日，加入了两个新的语言，并修复了一些漏洞。" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -140,7 +140,7 @@
             <local:MyListItem Grid.Row="0" Grid.Column="2"
                               Margin="-5,0,-5,0" Type="Clickable"
                               Logo="pack://application:,,,/images/Blocks/NeoForge.png"
-                              Title="NeoForge" Info="26.3.0.103"
+                              Title="NeoForge" Info="26.3.0.108"
                               ToolTip="打开 NeoForge 官网"
                               EventType="打开网页" EventData="https://neoforged.net/" />
         </Grid>
@@ -217,12 +217,12 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-16 07:59" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-17 10:58" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
                 <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-17 04:17" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-18 04:17" />
             </Grid>
 
             <!-- 右：刷新按钮 -->
