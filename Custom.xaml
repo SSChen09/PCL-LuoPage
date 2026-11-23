@@ -217,12 +217,12 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,16,7" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="数据更新于" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,7" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-22 08:23" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-23 08:56" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,16,0" FontSize="12"
                            Foreground="{DynamicResource ColorBrush3}" Text="下次自动更新" />
                 <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" FontWeight="Bold"
-                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-23 04:17" />
+                           Foreground="{DynamicResource ColorBrush1}" Text="2026-11-24 04:17" />
             </Grid>
 
             <!-- 右：刷新按钮 -->
